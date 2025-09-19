@@ -4,6 +4,13 @@
 % Package imports go here.
 
 % Local commands go here.
+\newcommand{\VeraRubinObservatory}{NSF-DOE Vera~C.~Rubin Observatory\xspace}
+
+\newcommand{\figRef}[1]{Fig.~\ref{fig:#1}\xspace}
+\newcommand{\figRefII}[2]{Figs.~\ref{fig:#1} and \ref{fig:#2}\xspace}
+\newcommand{\figRefIII}[3]{Figs.~\ref{fig:#1}, \ref{fig:#2}, and \ref{fig:#3}\xspace}
+\renewcommand{\secRef}[1]{Sec.~\ref{sec:#1}\xspace}
+\newcommand{\tabRef}[1]{Tab.~\ref{tab:#1}\xspace}
 
 %If you want glossaries
 %\input{aglossary.tex}
@@ -15,7 +22,7 @@
 % Update keywords and author information as necessary.
 \hypersetup{
     pdftitle={An Interim Report on the On-Sky Commissioning Campaign with LSSTCam},
-    pdfauthor={KeithBechtol},
+    pdfauthor={NSF-DOE Vera C. Rubin Observatory},
     pdfkeywords={}
 }
 
@@ -33,7 +40,12 @@
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
+From 15 April to 21 September 2025, the \VeraRubinObservatory conducted on an on-sky commissioning campaign using the LSST Camera (LSSTCam) to test the end-to-end functionality of hardware and software, as well as operational procedures.
 This interim report provides a preliminary technical overview of our understanding of the integrated system performance based tests and analyses conducted during the on-sky commissioning campaign with LSSTCam.
+The objectives are to synthesize what we have learned about the system in a timely way to inform Early Operations optimization, and to inform the Rubin science community on the progress of the LSSTCam on-sky campaign.
+The report is organized into sections that describe major activities during the campaign, as well as multiple aspects of the demonstrated system and science performance.
+All of the results presented here are to be understood as work in progress using engineering data and the initial versions of the data processing pipelines; the report is a living document that will be
+updated as analyses are refined.
 }
 
 % Change history defined here.
@@ -54,6 +66,31 @@ This interim report provides a preliminary technical overview of our understandi
 
 % ADD CONTENT HERE
 % You can also use the \input command to include several content files.
+
+\input{introduction.tex}
+
+\input{summary.tex}
+
+\input{camera.tex}
+
+\input{throughput.tex}
+
+\input{sky_background.tex}
+
+\input{image_quality.tex}
+
+\input{stray_light.tex}
+
+\input{system_timing.tex}
+
+\input{data_management.tex}
+
+\section{Calibration}
+\label{sec:calibration}
+
+\input{astrometry.tex}
+
+\input{photometry.tex}
 
 \appendix
 
