@@ -1,10 +1,84 @@
 \subsection{Astrometry}
 \label{sec:astrometry}
 
-\begin{itemize}
-    \item Figure: histogram of astrometric repeatability for ensemble of visits
-    \item Figure: static camera astrometric distortion model
-    \item Figure: average astrometric residuals in focal plane coordinates for ensemble of visits; two-panel figure to show full focal plane and an individual detector
-    \item Figure: average E/B mode across ensemble of visits; expect to see mostly a pure E-mode astrometric field indicative of residuals dominated by astrometric turbulence
-    \item Item any further discussion of astrometric residuals worth exploring further
-\end{itemize}
+
+
+Astrometric calibration establishes the geometric fidelity of the LSSTCam imaging system and ensures that object positions are consistent across visits and with external reference catalogs.
+The analysis presented here summarizes the current performance achieved during the Science Validation campaign and identifies the dominant sources of residual error.
+
+\subsubsection{Global Calibration}
+
+The global astrometric calibration is performed using the \texttt{gbdesAstrometricFit} model, which fits for source proper motions and parallaxes across all visits.
+Differential chromatic refraction (DCR) fitting will be enabled in upcoming processing runs.
+Recent improvements include the introduction of multiprocessing and the switch from small tract-level runs to larger HEALPix regions.
+These changes significantly reduced total processing time and improved overall convergence stability.
+
+The resulting astrometric repeatability meets design expectations in most regions of the sky observed with full focal-plane dithers.
+Figure~\ref{fig:am1_map} shows the AM1 metric, defined as the standard deviation of the separation between pairs of objects approximately five arcminutes apart.
+Typical values are at the $\sim$10~milliarcsecond (mas) level, with localized regions showing higher scatter that are under investigation.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/am1_map.png}
+      \includegraphics[width=0.7\textwidth]{figures/astrometric_repeat_hist.png}
+
+    \caption{Map of the AM1 astrometric repeatability metric across the Science Validation survey region.
+    The majority of the field achieves 10~mas RMS repeatability, consistent with design specifications.}
+    \label{fig:am1_map}
+\end{figure}
+
+\subsubsection{Residual Patterns and Atmospheric Contribution}
+
+Mean astrometric residuals binned by position in the focal plane are shown in Figure~\ref{fig:astrometry_residuals}.
+The residuals in both X and Y directions are reveal effects at the chip level.
+For example the features on the ITL detectors are consistent with the laboratory measured sensor height maps.
+These higher order distortions remain at the individual chip level and will be modeled out in future iterations.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/astrometry_residuals.png}
+    \caption{Mean astrometric residuals across the focal plane in X (left) and Y (right) directions.
+    The spatial structure is consistent with atmospheric turbulence and small chip-level distortions.}
+    \label{fig:astrometry_residuals}
+\end{figure}
+
+Because LSSTCam uses relatively short 30-second exposures, atmospheric turbulence introduces correlated position shifts across the field.
+A Gaussian-process model has been developed to represent this atmospheric component and is being tested for inclusion in the standard pipeline.
+This model reproduces the observed E-mode correlation structure seen in the residuals and reduces the single-visit scatter by roughly 50\% when applied.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/per_visit_astrometry_residuals.png}
+     \includegraphics[width=\textwidth]{figures/gaussian_process_model.png}
+    \caption{Gaussian-process modeling of atmospheric turbulence.
+    The model captures large-scale correlated patterns in the residuals and reduces single-visit astrometric scatter by about 50\%.}
+    \label{fig:gaussian_process_model}
+\end{figure}
+
+After subtraction of the modeled atmospheric term, stacked residual maps reveal additional fine-scale structure, including chip-dependent distortions and faint tree-ring patterns on ITL sensors.
+These effects are below the atmospheric level but are now detectable due to reduced noise and will be incorporated into refined models.
+
+\subsubsection{Refined Camera Distortion Model}
+
+Astrometric solutions have been used to derive an updated camera distortion model, replacing the pre-commissioning geometric model from \texttt{obs\_lsst}.
+This new model reflects the as-built optical system and the measured alignment of detectors in situ.
+The difference between the two models is shown in Figure~\ref{fig:camera_model_diff}.
+After removing a first-order affine transformation, small chip-to-chip residuals and systematic trends between ITL and e2v sensors become visible.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/camera_model_diff.png}
+    \caption{Comparison between the pre-commissioning camera model and the astrometry-derived distortion model.
+    Residuals after removing a first-order affine term reveal fine-scale chip-to-chip differences and sensor-dependent trends.}
+    \label{fig:camera_model_diff}
+\end{figure}
+
+The refined camera model is now incorporated into single-frame processing, improving the accuracy of instrumental calibration and the consistency of WCS solutions.
+
+\subsubsection{Summary}
+
+Astrometric repeatability with LSSTCam currently achieves approximately 10~mas precision, consistent with design specifications in regions with focal-plane-scale dithers.
+Residuals at the single-visit level are dominated by atmospheric turbulence and are well described by a Gaussian-process model that reduces scatter by about a factor of two.
+Fine-scale detector distortions are now measurable and are being folded into updated calibration models.
+A refined, on-sky camera distortion model has been adopted for single-frame processing and continues to improve the overall geometric calibration of the system.
+Future work will integrate DCR fitting, parallaxes, and the Gaussian-process atmospheric model directly into the global solution for DR1.
