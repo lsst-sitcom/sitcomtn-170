@@ -1,7 +1,63 @@
 \section{Measured Sky Backgrounds}
 \label{sec:sky_background}
 
-\begin{itemize}
-    \item Comparison to predicted sky background levels
-    \item Distribution of limiting surface brightness
-\end{itemize}
+During the LSSTCam on-sky campaign, dedicated tests were performed to characterize the background, evaluate the performance of the \texttt{SkyCorrectionTask}, and verify compliance with project-level requirements.
+
+\subsection{Sky Brightness Determination}
+
+Sky brightness measurements were performed using forced photometry on randomly placed “sky sources’’ across the focal plane.
+For each position, the local sky flux was compared to the model prediction.
+Across the sample of real LSSTCam data, the precision of the sky brightness determination was better than 1\% in approximately 99\% of all measurements, meeting the system requirement (Fig.~\ref{fig:sky_backgrounds}).
+
+These tests used data from weekly DRP processing runs (e.g., week~18) that employed the full-focal-plane background modeling introduced with the \texttt{SkyCorrectionTask}.
+This task, initially developed for HSC, was commissioned for LSSTCam and now fits large-scale gradients across the entire focal plane.
+Comparisons between per-detector and full-focal-plane background solutions show that the latter reduces over-subtraction near bright, extended sources and improves uniformity across the field.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/sky_sources.png}
+
+    \caption{Performance of sky brightness determination using forced photometry of randomly placed sky sources.
+    Nearly all measurements ($\sim$99\%) achieve better than 1\% precision, satisfying the system requirement.}
+    \label{fig:sky_backgrounds}
+\end{figure}
+
+\subsection{Limiting Surface Brightness Sensitivity}
+
+Random sampling of sky regions from ten representative $g$-band LSSTCam visits yields a limiting surface brightness of $\sim$28~mag~arcsec$^{-2}$.
+This limit is defined as three times the standard deviation of the background flux distribution within 10~arcsecond boxes.
+Further validation using radial photometry of the brightest cluster galaxy (BCG) in Abell~360 confirms that surface brightness features are detected to similar levels in multiple bands.
+These measurements demonstrate that the system is achieving the expected depth for extended, low surface brightness structures (Fig.~\ref{fig:lsb_results}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/surfacebrightness1.png}
+    \includegraphics[width=0.4\textwidth]{figures/surfacebrightness2.png}
+    \caption{Low surface brightness performance.
+    \textit{Left:} Random sampling of $g$-band LSSTCam visits yields a limiting surface brightness of $\sim$28~mag~arcsec$^{-2}$.
+    \textit{Right:} Radial photometry around the BCG in Abell~360 confirms consistent surface brightness sensitivity across filters.}
+    \label{fig:lsb_results}
+\end{figure}
+
+\subsection{Optical Ghost Area Impact}
+
+The contribution of optical ghosts to the effective background and usable imaging area was evaluated using ray-tracing simulations with the \texttt{Batoid} optical model.
+Simulated stars of varying brightness were placed at different field positions, and the fractional area of the focal plane impacted by ghost reflections was measured as a function of bandpass.
+The mean ghost-affected area across all filters is $\sim$0.6\%, with the largest values in $u$ and the smallest in $r$ and $i$.
+This satisfies the system requirement that the fractional area impacted by ghosts remain below 1\%.
+On-sky verifications confirm that the simulated ghost patterns correspond well to observed behavior (Fig.~\ref{fig:ghosts}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/ghost_impact1.png}
+    \includegraphics[width=0.9\textwidth]{figures/ghost_impact2.png}
+    \caption{Fraction of the focal plane impacted by optical ghosts simulated with \texttt{Batoid}.
+    The mean loss is $\sim$0.6\% across all filters, with worst performance in $u$ and best in $r$ and $i$, satisfying the requirement that ghost area loss remain below 1\%.}
+    \label{fig:ghosts}
+\end{figure}
+
+\subsection{Summary}
+
+The commissioning campaign demonstrated that LSSTCam background modeling meets or exceeds requirements.
+Sky brightness precision is better than 1\%, limiting surface brightness sensitivity reaches $\sim$28~mag~arcsec$^{-2}$, and the fractional area affected by optical ghosts remains below 1\%.
+These results validate both the photometric and low surface brightness performance of the system and establish a foundation for continued optimization of background modeling in future data releases.
