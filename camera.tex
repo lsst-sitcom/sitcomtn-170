@@ -11,15 +11,59 @@
     \item Standard visit (i.e., snaps) evaluation?
 \end{itemize}
 
-\subsection{Useable Pixels}
+We performed comprehensive in-dome calibration to generate calibration products and validate LSSTCam.
+Calibration data not requiring external illumination included biases and darks.
+We operated the Flat Field Projector with single-LED flats and generated Photon Transfer Curves (PTCs).
+We exercised both calibration system sources: a white-light LED with a fiber spectrograph and photodiode plus electrometer, and a tunable laser with the same metrology chain.
+We used the Collimated Beam Projector (CBP) for filter scans (and no-filter scans) and to acquire crosstalk spot data.
+These activities validated the calibration pathways and established in-situ sensor performance baselines.
 
-Field of View Area Factor (fA) for System Performance diagram
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/calibration_systems.png}
+    \caption{Our flat field screen illuminated by our single LEDs and pairs of single LEDs. The LEDs from left to right are named Royal Blue, both Royal Blue and Green, Green, Lime, both Lime and Deep Red, Deep Red)}
+    \label{fig:calib_systems}
+\end{figure}
 
-Could include a figure to show focal plane
+A total of 188/189 sensors are operational, with only R30/S12 currently non-operational.
+The median amplifier loses $\sim$0.45\% of its area to defects, while the mean across amplifiers is closer to $\sim$0.7\%.
+Elevated defect counts appear where effective QE is lower at detector edges, especially for Cy0 and Cy7 amplifiers.
+No new static defect classes have been identified on e2v devices (hot/cold pixels and columns remain as expected), while a subset of ITL detectors exhibits “vampire” pixels and locally higher noise.
+Dynamic masking still requires work, including treatment of e2v edge bleeds and occasional flare-type artifacts when bright stars fall on extreme detector edges.
+Overall, $\gtrsim$99\% of the focal plane is active and usable within the calibrated field.
 
-\subsection{Sensor Characterization}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/usable_pixels.png}
+    \caption{Usable pixels summary: 188/189 sensors operational (R30/S12 offline), median amplifier defect area $\sim$0.45\% (mean $\sim$0.7\%), with edge-related QE behavior raising counts in Cy0/Cy7 amplifiers; no new static defect types on e2v, “vampire” pixels seen on some ITL detectors.}
+    \label{fig:usable_pixels}
+\end{figure}
 
-Summary discussion on
+Optical vignetting limits the fully calibrate-able radius to the camera requirement of 317~mm (black circle).
+We introduced a \texttt{PARTLY\_VIGNETTED} mask plane for 317–350~mm radius (red circle), where calibration is expected to be feasible but at reduced fidelity relative to the inner zone.
+If calibration to 350~mm is achieved, the residual loss of area relative to the geometric maximum radius of 365~mm (blue circle) is minimal, affecting only the extreme corners of the focal plane.
+Regions outside 350~mm are treated as fully vignetted and excluded from science products.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/vignetting_fov.png}
+    \caption{Optical vignetting and calibrate-able field of view: requirement radius 317~mm (black), target extension to 350~mm (red) for partial vignetting, and geometric maximum 365~mm (blue).}
+    \label{fig:vignetting_fov}
+\end{figure}
+
+Read-noise maps show all channels in specification, with ITL devices having slightly higher medians than e2v and some top–bottom amplifier shifts visible on subsets of ITL sensors.
+Gain maps show nominal values consistent with design and optimal ADC usage.
+PTC turn-off levels indicate amplifier dynamic ranges typically near $\sim$$10^5$\,DN, with subsets lower; pixels above the turn-off are saturated in processing.
+CBP spot data confirm that the updated sequencer reduces noise and correlations, but crosstalk coefficients require re-derivation post-change; first-order terms are largely removed while higher orders remain to be tuned for DP2 processing.
+No new major anomalies were uncovered during these campaigns, and calibration improvements are being integrated iteratively into ISR and downstream processing.
+
+\subsection{Summary}
+
+All calibration systems were exercised end-to-end, and their products validated in dome. :contentReference[oaicite:3]{index=3}
+Operational yield is 188/189 sensors with $\gtrsim$99\% active focal-plane area within the calibrate-able region. :contentReference[oaicite:4]{index=4}
+A \texttt{PARTLY\_VIGNETTED} mask enables use out to 350~mm radius with controlled fidelity, minimizing area loss to extreme corners while avoiding over-fitting in fully vignetted zones.
+Read noise, gain, and dynamic range meet expectations, and post-sequencer crosstalk calibration is in progress for DP2.
+
 
 \subsection{Bright Stars and Moon}
 

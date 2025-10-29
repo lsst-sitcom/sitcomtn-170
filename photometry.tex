@@ -7,3 +7,64 @@
     \item Figure: average photometric residuals in focal plane coordinates for ensemble of visits; maybe a two-panel figure to show full focal plane and an individual detector
     \item Any other correlations of photometry that are worth exploring further (e.g., residuals w/ respect to stellar color, stellar flux, airmass)
 \end{itemize}
+
+Photometric calibration establishes the flux scale uniformity across the focal plane and over time, providing the foundation for all downstream science measurements.
+The LSSTCam system now achieves internal photometric repeatability at or below the 5~millimag (mmag) level, consistent with design requirements.
+
+\subsubsection{Reference Catalog and Initial Zeropoints}
+
+The first stage of the calibration uses the MONSTER reference catalog \citep[DMTN-277]{DMTN-277}, a composite all-sky dataset cross-calibrated from SkyMapper, Pan-STARRS, Gaia~XP, and other surveys.
+Each LSSTCam detector receives an individual zeropoint solution by matching instrumental fluxes to the reference catalog.
+This per-detector calibration already delivers sub-percent photometric repeatability in the $griz$ bands, as shown in
+These initial zeropoints are used for prompt processing, which does not include a global calibration step.
+
+\begin{figure}[h]
+    \centering
+     \includegraphics[width=\textwidth]{figures/PA1.png}
+    \caption{Per-detector zeropoint calibration using the MONSTER reference catalog.
+    The preliminary calibration achieves better than 1\% repeatability for bright, isolated sources in the $griz$ bands.}
+    \label{fig:perdetector_zeropoint}
+\end{figure}
+
+\subsubsection{Global Forward Calibration}
+
+The Forward Global Calibration Method (\texttt{fgcmcal}) combines all visits to produce a self-consistent photometric solution that includes illumination and chromatic corrections.
+This method jointly fits the atmosphere, instrumental throughput, and detector response across the focal plane.
+The resulting photometric repeatability is 4–5~mmag in all bands ($ugrizy$), meeting the LSST photometric uniformity requirement (Fig.~\ref{fig:fgcmcal_performance}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/fgcmcal_performance.png}
+    \caption{Photometric repeatability before and after application of the Forward Global Calibration Method (\texttt{fgcmcal}).
+    The global solution achieves 4–5~mmag internal repeatability across all bands.}
+    \label{fig:fgcmcal_performance}
+\end{figure}
+
+At this precision, the observed scatter is approaching the limit set by Poisson noise in the stellar measurements themselves.
+The intrinsic calibration precision is therefore likely closer to the 2~mmag level.
+
+\subsection{Chromatic Response Across the Focal Plane}
+
+The chromatic response of the LSSTCam focal plane varies with both detector type and filter transmission.
+The effect is strongest in the $g$~band, where the hybrid focal plane combines ITL and e2v sensors with slightly different quantum efficiency curves.
+Figure~\ref{fig:chromatic_response} compares the predicted chromatic response—based on laboratory filter scans and detector QE measurements—to the measured on-sky response derived from stellar photometry.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/chromatic_response_predicted.png}
+     \includegraphics[width=0.45\textwidth]{figures/chromatic_response_measured.png}
+    \caption{Predicted (left) and measured (right) chromatic response across the $g$-band focal plane.
+    The measured variation is within $\pm20$~mmag, demonstrating excellent agreement with the predicted response.
+    Accurate modeling of this chromatic structure is critical for maintaining uniformity at the sub-percent level.}
+    \label{fig:chromatic_response}
+\end{figure}
+
+The strong correspondence between the measured and predicted patterns indicates that the physical modeling of the detector and filter system is accurate at the level required for precision photometry.
+Incorporating these chromatic corrections into \texttt{fgcmcal} ensures that color-dependent throughput effects are accounted for in the final photometric solution.
+
+\subsubsection{Summary}
+
+LSSTCam photometric calibration now achieves internal repeatability at or below 5~mmag, comfortably meeting design requirements.
+Per-detector zeropoints using the MONSTER catalog already reach sub-percent precision, while the global \texttt{fgcmcal} solution provides 4–5~mmag repeatability across all bands.
+Measured chromatic response maps agree closely with predictions, validating the laboratory throughput models and confirming the accuracy of the chromatic correction applied in the pipeline.
+Future work will focus on refining illumination corrections and incorporating updated reference catalogs for the final DR1 global calibration.
