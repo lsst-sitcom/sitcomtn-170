@@ -30,11 +30,11 @@ The process of identifying, investigating, and characterizing stray and scattere
 
 A total of nine hours of on-sky testing (twelve test cases) and fifteen hours of in-dome testing (eight test cases) were dedicated to this effort. Weekly coordination meetings between the stray-light task force and LSSTCam Science Unit have been maintained to ensure progress in both diagnosis and mitigation.
 
-\subsection{Example: The “Scratch Tape” Artifact}
+\subsection{Example: The ``Scratched Tape'' Artifact}
 
-The most prominent and frequent stray-light feature identified during commissioning is colloquially referred to as \emph{Scratch Tape}. It manifests as a series of bright, elongated streaks across the focal plane (Fig.~\ref{fig:scratch_source}). These features can reach surface brightness levels up to $\sim$20\% of the dark-sky background and appear prominently in roughly 5\% of the exposures taken during commissioning. Their structured pattern and relatively high contrast make them among the most visually prominent and scientifically significant artifacts observed.
+The most prominent and frequent stray-light feature identified during commissioning is colloquially referred to as \emph{Scratched Tape}. It manifests as a series of bright, elongated streaks across the focal plane (Fig.~\ref{fig:scratch_source}). These features can reach surface brightness levels up to $\sim$20\% of the dark-sky background and appear prominently in roughly 5\% of the exposures taken during commissioning. Their structured pattern and relatively high contrast make them among the most visually prominent and scientifically significant artifacts observed.
 
-Through a series of investigations including pinhole imaging, twilight flats, and optical modeling, the origin of the Scratch Tape feature was traced to an unobstructed light path between the mid-level and center-section light baffles on the Telescope Mount Assembly (TMA). Light entering the system at an off-axis range from ${\sim}20$ to ${\sim}25$ degrees can pass through this gap, reflect off of M1, and scattered directly into the camera. This large off-axis path is expected to be blocked by the Light Wind Screen once it is operating; however, the system was not deployed at the time of commissioning.
+Through a series of investigations including pinhole imaging, twilight flats, and optical modeling, the origin of the Scratched Tape feature was traced to an unobstructed light path between the mid-level and center-section light baffles on the Telescope Mount Assembly (TMA). Light entering the system at an off-axis range from ${\sim}20$ to ${\sim}25$ degrees can pass through this gap, reflect off of M1, and scattered directly into the camera. This large off-axis path is expected to be blocked by the Light Wind Screen once it is operating; however, the system was not deployed at the time of commissioning.
 
 In addition to in-dome testing, the feature was also successfully reproduced in targeted on-sky tests by placing a bright star $\sim$21 degrees off-axis in the identified azimuthal sector. Both \texttt{Zemax} and \texttt{Batoid} simulations confirmed that an unobstructed light path existed between the two baffles that could illuminate the camera. Independent tests with the CBP verified the same geometry under controlled dome conditions.
 
@@ -43,7 +43,7 @@ In addition to in-dome testing, the feature was also successfully reproduced in 
     \centering
     \includegraphics[width=0.4\textwidth]{figures/pinhole.png}
     \includegraphics[width=0.53\textwidth]{figures/lightpath.png}
-    \caption{Identification of the light path responsible for the “Scratch Tape” artifact. \textit{Left:} pinhole images taken on-sky during twilight (top) and in-dome (bottom). The unbaffled light path between the TMA mid-level and center-section baffles is identified with green boxes. \textit{Right:} modeling in confirmed the existence of a direct off-axis light path through this gap, off of M1, and into the camera. Figure adapted from \citet{SITCOMTN-166}.}
+    \caption{Identification of the light path responsible for the ``Scratched Tape'' artifact. \textit{Left:} pinhole images taken on-sky during twilight (top) and in-dome (bottom). The unbaffled light path between the TMA mid-level and center-section baffles is identified with green boxes. \textit{Right:} modeling in confirmed the existence of a direct off-axis light path through this gap, off of M1, and into the camera. Figure adapted from \citet{SITCOMTN-166}.}
     \label{fig:scratch_source}
 \end{figure}
 
@@ -52,7 +52,7 @@ In addition to in-dome testing, the feature was also successfully reproduced in 
 \subsection{Short-term Mitigation Plan}
 
 It is suspected that several of the stray light features identified during commissioning may come from similar unobstructed paths at high off-axis angles, since much of the TMA and camera baffling was not designed with such a large incident angle range in mind. Eventually these light paths are expected to be blocked by the Light Wind Screen. However, in the stort term, an effective mitigation strategy is to extend the mid-level baffle outward by approximately 22\,cm. 
-This baffle extension offers a simple, robust, and immediate reduction of the Scratch Tape feature with no expected optical or mechanical drawbacks.
+This baffle extension offers a simple, robust, and immediate reduction of the Scratched Tape feature with no expected optical or mechanical drawbacks.
 The design has been finalized and installation is expected to start in late November.
 
 Following installation, additional on-sky and in-dome tests will be performed to verify that the light path is fully blocked. Further mitigations under study include improving the M2 baffle coating, additional blackening of reflective surfaces near the auto-changer, and evaluation of direct paths from M3 to the camera. 
