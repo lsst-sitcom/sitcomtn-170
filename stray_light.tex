@@ -1,55 +1,66 @@
 \section{Stray and Scattered Light}
 \label{sec:stray_light}
 
-During the LSSTCam on-sky commissioning campaign, a diverse set of stray and scattered light artifacts were identified on the focal plane. In contrast to optical ghosts, features predicted from nominal reflections within the optical system, these artifacts arise from unwanted light paths that do not follow the designed optical train. They represent parasitic illumination reaching the focal plane through reflections, scattering, or incomplete baffling of external light sources.
+The unique, wide-field design of the Simonyi Survey Telescope makes it particularly susceptible to stray and scattered light. Since LSST seeks to investigate the low-surface-brightness universe \citep{2019ApJ...873..111I}, it is important to identify, model, and mitigate stray-light artifacts. This is particularly important in the context of the  the delayed installation of the light--wind screen \citep[LWS;][]{Marchiori:2024}. A general overview of the investigation of stray light features during commissioning can be found in \citet{SITCOMTN-160}, while a detailed investigation of the most prominent stray light feature (the ``scratched tape'') is discussed in \citet{SITCOMTN-166}. Here, we provide a brief summary of those efforts and the impact of stray and scattered light.
 
-To date, approximately fourteen distinct stray-light features have been cataloged. The team has determined the optical or opto-mechanical origin for the majority of these, while a few remain under investigation. Most of the remaining unidentified features are expected to be mitigated by the \emph{Light Wind Screen} (LWS), which was recently installed and is expected to become fully operational in the coming months. Additional mitigations have included selective blackening of reflective surfaces inside the dome and telescope structure.
+A diverse set of stray and scattered light features were identified during the LSSTCam commissioning campaign. In contrast to optical ghosts, which are expected due to reflections within the optical system, stray and scattered light artifacts arise from unwanted light paths that do not follow the designed optical train. They include parasitic illumination that reaches the focal plane through reflections, scattering, or incomplete baffling of external light sources.
+
+To date, more than a dozen distinct stray-light features have been cataloged. The team has determined the optical or opto-mechanical origin for several of these features, while others remain under investigation. Most of the remaining unidentified features are expected to be mitigated by the LWS, which is expected to become fully operational in the coming months. In addition, other  mitigations strategies have been pursued including extra baffling and reduction of in-dome light sources.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{figures/straylight_examples.png}
-    \caption{Representative examples of stray and scattered light features observed during LSSTCam commissioning. Approximately fourteen distinct artifacts have been cataloged, with the majority now traced to specific opto-mechanical origins. The remaining unidentified cases are expected to be mitigated by the Light Wind Screen and additional baffling improvements.}
+    \caption{Examples of stray and scattered light features observed during LSSTCam commissioning. More than a dozen artifacts have been cataloged. Several of the most prominent artifacts have been traced to specific opto-mechanical origins. The incidence of stray and scattered light artifacts are expected to be significantly  mitigated by the Light Wind Screen and additional baffling improvements.}
     \label{fig:stray_examples}
 \end{figure}
 
-\subsection{Detection and Characterization Workflow}
+\subsection{Identification and Characterization}
 
-Each newly identified feature follows a structured diagnostic workflow:
+The process of identifying, investigating, and characterizing stray and scattered light artifacts proceeded in several steps. The order in which these steps were executed varied from feature to feature.
+
 \begin{enumerate}
-    \item \textbf{Classification and Documentation:} Compare with the existing catalog to determine whether the artifact represents a previously known type or a novel feature.
-    \item \textbf{Modeling and Reproduction:} Perform ray-tracing simulations using both \texttt{Batoid} and \texttt{Zemax} to reproduce the observed geometry and intensity distribution.
-    \item \textbf{On-Sky and In-Dome Testing:} Conduct dedicated observations—both on sky and using the Collimated Beam Projector (CBP)—to confirm the proposed optical paths.
-    \item \textbf{Source Identification:} Carry out astrometric searches to locate the bright star or planet responsible for generating the feature, typically at off-axis angles of 15–25 degrees.
+    \item \textbf{Identification:} Systematic visual inspection of post-ISR-processed LSSTCam images was performed throughout commissioning. When new stray light features were identified, they were circulated among a team of experts for discussion.
+    \item \textbf{Classification and Documentation:} Artifacts were compared to a library of known artifacts to determine whether they represents a novel feature.
+    \item \textbf{Modeling and Reproduction:} Optical ray tracing was performed (i.e., using  \texttt{Zemax} and  \texttt{Batoid}) to reproduce the observed geometry and intensity distribution.
+    \item \textbf{On-Sky and In-Dome Testing:} Dedicated test observations were performed to confirm or better understand the source and optical path. These observations included on-sky and in-dome images. The CBP was used to provide specific illumination paths during in-dome testing.
+    \item \textbf{Source Identification:} Carry out astrometric searches to locate the bright astronomical source (star, planet, or the moon) responsible for generating the feature. 
     \item \textbf{Mitigation Assessment:} Evaluate hardware and operational mitigations, including additional baffling, surface treatment, and observing constraints.
     \item \textbf{Impact Evaluation:} Estimate the potential scientific impact on photometric and background measurements.
 \end{enumerate}
 
 A total of nine hours of on-sky testing (twelve test cases) and fifteen hours of in-dome testing (eight test cases) were dedicated to this effort. Weekly coordination meetings between the stray-light task force and LSSTCam Science Unit have been maintained to ensure progress in both diagnosis and mitigation.
 
-\subsection{Example: The “Scratch Tape” Artifact}
+\subsection{Example: The ``Scratched Tape'' Artifact}
 
-The most prominent and frequent stray-light feature identified during commissioning is colloquially referred to as \emph{Scratch Tape}. It manifests as a series of bright, elongated streaks or “tape-like” bands across the focal plane (see Fig.~\ref{fig:scratch_source}). These features can reach surface brightness levels up to $\sim$20\% of the dark-sky background and appear in roughly 5\% of all exposures. Their structured pattern and relatively high contrast make them among the most visually and scientifically significant artifacts observed.
+The most prominent and frequent stray-light feature identified during commissioning is colloquially referred to as \emph{Scratched Tape}. It manifests as a series of bright, elongated streaks across the focal plane (Fig.~\ref{fig:scratch_source}). These features can reach surface brightness levels up to $\sim$20\% of the dark-sky background and appear prominently in roughly 5\% of the exposures taken during commissioning. Their structured pattern and relatively high contrast make them among the most visually prominent and scientifically significant artifacts observed.
 
-Through a combination of pinhole imaging, twilight flats, and optical modeling, the origin of the Scratch Tape feature was traced to an unobstructed light path between the mid-level and center-section light baffles on the Telescope Mount Assembly (TMA). Light entering through this gap reflects off M1 and is scattered directly into the camera. Under normal operation, this path should be blocked by the LWS; however, the system was not yet deployed during early commissioning observations.
+Through a series of investigations including pinhole imaging, twilight flats, and optical modeling, the origin of the Scratched Tape feature was traced to an unobstructed light path between the mid-level and center-section light baffles on the Telescope Mount Assembly (TMA). Light entering the system at an off-axis range from ${\sim}20$ to ${\sim}25$ degrees can pass through this gap, reflect off of M1, and scattered directly into the camera. This large off-axis path is expected to be blocked by the Light Wind Screen once it is operating; however, the system was not deployed at the time of commissioning.
+
+In addition to in-dome testing, the feature was also successfully reproduced in targeted on-sky tests by placing a bright star $\sim$21 degrees off-axis in the identified azimuthal sector. Both \texttt{Zemax} and \texttt{Batoid} simulations confirmed that an unobstructed light path existed between the two baffles that could illuminate the camera. Independent tests with the CBP verified the same geometry under controlled dome conditions.
 
 
-\begin{figure}[h]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/pinhole.png}
-    \includegraphics[width=0.4\textwidth]{figures/lightpath.png}
-    \caption{Identification of the light path responsible for the “Scratch Tape” artifact. \textit{Left:} pinhole and twilight flat analyses demonstrating light entering between the mid-level and center-section baffles on the TMA. \textit{Right:} ray-tracing and CBP results confirming that light reflects off M1 and enters the camera directly through this gap.}
+    \includegraphics[width=0.53\textwidth]{figures/lightpath.png}
+    \caption{Identification of the light path responsible for the ``Scratched Tape'' artifact. \textit{Left:} pinhole images taken on-sky during twilight (top) and in-dome (bottom). The unbaffled light path between the TMA mid-level and center-section baffles is identified with green boxes. \textit{Right:} modeling in confirmed the existence of a direct off-axis light path through this gap, off of M1, and into the camera. Figure adapted from \citet{SITCOMTN-166}.}
     \label{fig:scratch_source}
 \end{figure}
 
 
-The feature was successfully reproduced through targeted on-sky tests by placing bright stars $\sim$20–22 degrees off-axis in the identified azimuthal sector. Both \texttt{Zemax} and \texttt{Batoid} simulations confirmed that the observed path is consistent with reflections between the two baffles and M1. Independent CBP experiments verified the same geometry under controlled dome conditions.
 
-\subsection{Mitigation Plan}
+\subsection{Short-term Mitigation Plan}
 
-A short-term mitigation has been designed by extending the mid-level baffle by approximately 22~cm to block the problematic light path. This hardware extension, developed collaboratively by J.~Andrew, D.~Neal, and colleagues, is scheduled for installation in late November. Although the LWS will ultimately provide a more comprehensive solution, the baffle extension offers a robust and immediate reduction of the Scratch Tape feature with no expected optical or mechanical drawbacks.
+It is suspected that several of the stray light features identified during commissioning may come from similar unobstructed paths at high off-axis angles, since much of the TMA and camera baffling was not designed with such a large incident angle range in mind. Eventually these light paths are expected to be blocked by the Light Wind Screen. However, in the stort term, an effective mitigation strategy is to extend the mid-level baffle outward by approximately 22\,cm. 
+This baffle extension offers a simple, robust, and immediate reduction of the Scratched Tape feature with no expected optical or mechanical drawbacks.
+The design has been finalized and installation is expected to start in late November.
 
-Following installation, additional on-sky and in-dome tests will be performed to verify that the light path is fully blocked. Further mitigations under study include refinements to the M2 baffle coating, additional blackening of reflective surfaces near the auto-changer, and evaluation of direct paths from M3 to the camera. In parallel, algorithmic approaches for detecting and removing residual stray-light features at the data-processing stage are being explored.
+Following installation, additional on-sky and in-dome tests will be performed to verify that the light path is fully blocked. Further mitigations under study include improving the M2 baffle coating, additional blackening of reflective surfaces near the auto-changer, and evaluation of direct paths from M3 to the camera. 
+In parallel, algorithmic approaches for detecting and removing residual stray-light features at the data-processing stage are being explored. %ADW: This may be true, but I'm not fully aware of them...
 
 \subsection{Summary}
 
-The investigation of stray and scattered light during LSSTCam commissioning has demonstrated a systematic framework for discovery, modeling, and mitigation of parasitic optical features. The majority of identified artifacts now have confirmed optical origins and practical mitigation paths. Continued refinement of the opto-mechanical model, expanded baffling, and the activation of the Light Wind Screen are expected to significantly reduce stray light in future operations.
+The investigation of stray and scattered light during LSSTCam commissioning has established a framework for discovering, modeling, and mitigating parasitic optical features affecting the LSSTCam images. 
+Thorough investigations of the most prominent stray light features have resulted in a detailed understanding of their origins and have enabled short- and long-term mitigation strategies. 
+Continued refinement of the opto-mechanical model, expanded baffling, and the commissioning of the Light Wind Screen are expected to significantly reduce stray light in operations.
+
