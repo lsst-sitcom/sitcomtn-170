@@ -11,20 +11,6 @@
     \item Standard visit (i.e., snaps) evaluation?
 \end{itemize}
 
-We performed comprehensive in-dome calibration to generate calibration products and validate LSSTCam.
-Calibration data not requiring external illumination included biases and darks.
-We operated the Flat Field Projector with single-LED flats and generated Photon Transfer Curves (PTCs).
-We exercised both calibration system sources: a white-light LED with a fiber spectrograph and photodiode plus electrometer, and a tunable laser with the same metrology chain.
-We used the Collimated Beam Projector (CBP) for filter scans (and no-filter scans) and to acquire crosstalk spot data.
-These activities validated the calibration pathways and established in-situ sensor performance baselines.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{figures/calibration_systems.png}
-    \caption{Our flat field screen illuminated by our single LEDs and pairs of single LEDs. The LEDs from left to right are named Royal Blue, both Royal Blue and Green, Green, Lime, both Lime and Deep Red, Deep Red)}
-    \label{fig:calib_systems}
-\end{figure}
-
 A total of 188/189 sensors are operational, with only R30/S12 currently non-operational.
 The median amplifier loses $\sim$0.45\% of its area to defects, while the mean across amplifiers is closer to $\sim$0.7\%.
 Elevated defect counts appear where effective QE is lower at detector edges, especially for Cy0 and Cy7 amplifiers.
@@ -59,7 +45,6 @@ No new major anomalies were uncovered during these campaigns, and calibration im
 
 \subsection{Summary}
 
-All calibration systems were exercised end-to-end, and their products validated in dome. :contentReference[oaicite:3]{index=3}
 Operational yield is 188/189 sensors with $\gtrsim$99\% active focal-plane area within the calibrate-able region. :contentReference[oaicite:4]{index=4}
 A \texttt{PARTLY\_VIGNETTED} mask enables use out to 350~mm radius with controlled fidelity, minimizing area loss to extreme corners while avoiding over-fitting in fully vignetted zones.
 Read noise, gain, and dynamic range meet expectations, and post-sequencer crosstalk calibration is in progress for DP2.
