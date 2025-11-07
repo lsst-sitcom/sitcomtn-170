@@ -1,0 +1,62 @@
+\subsection{PSF Characterization}
+\label{sec:psf}
+
+The characterization of the point spread function (PSF) provides a key measure of the image quality and calibration performance achieved during LSSTCam commissioning.
+
+\subsubsection{Focal Plane Residuals}
+
+Average PSF size residuals across the focal plane are at or below the 0.5\% level, indicating sub-percent accuracy in the PSF modeling (Fig.~\ref{fig:psf_residuals}).
+When the residuals are stacked across ensemble visits, distinct spatial structures become visible.
+A ring-like pattern at the edge of the field corresponds to vignetting effects.
+Small amplifier-level offsets are observed on e2v sensors.
+Most notably, a “blob” pattern appears on ITL sensors, consisting of circular features within each device.
+
+These ITL features are highly correlated with the height map of each sensor measured during laboratory testing at SLAC.  (Fig.~\ref{fig:psf_height}).
+Blink comparisons between the PSF residual maps and the measured height maps show an excellent correspondence.
+This confirms that local defocus from sensor height variations produces the observed PSF structure.
+The PSF thus serves as a secondary map of focal-plane topography, which can be incorporated into future models to further reduce residuals.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/focalplane_T_residuals.png}
+    \caption{Average PSF size residuals across the LSSTCam focal plane.
+    Residuals are at the $\leq$0.5\% level.
+    The ring at the edge corresponds to vignetting, small offsets appear on e2v sensors, and the blob pattern on ITL sensors matches the laboratory-measured sensor height map from SLAC.}
+    \label{fig:psf_residuals}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/detector_height.png}
+    \includegraphics[width=0.495\textwidth]{figures/T_residuals.png}
+    \caption{Size residuals are highly correlated with the  laboratory-measured sensor height map from SLAC.}
+    \label{fig:psf_height}
+\end{figure}
+
+\subsubsection{Brighter–Fatter Correction}
+
+The dependence of PSF size on source flux—the brighter–fatter effect—has been modeled and corrected using an electrostatic approach.
+This new model achieves accuracy better than 0.5\%, satisfying and exceeding both Rubin internal requirements and external dark-energy science goals.
+Comparisons of residual PSF size as a function of flux show that the electrostatic model removes the previous over-correction observed in the default pipeline.
+Implementation of this improved correction in standard processing is in progress.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/brighterFatter.png}
+    \caption{Brighter–fatter correction performance.
+    The blue curve shows the uncorrected flux-dependent PSF size residuals, the red curve the current pipeline correction, and the black curve the new electrostatic model.
+    The latter achieves sub-0.5\% accuracy and removes the over-correction seen previously.}
+    \label{fig:brighter_fatter}
+\end{figure}
+
+\subsubsection{Ongoing and Future Work}
+
+Several enhancements to PSF modeling are under active development.
+A chromatic PSF model has been demonstrated and implemented in the pipeline but is not yet enabled by default.
+Work is underway to transition from per-CCD to full focal plane PSF modeling.
+Efforts are also in progress to shift from pixel coordinates to sky coordinates for PSF interpolation and to incorporate laboratory-measured sensor height information directly into the model.
+Each of these improvements is expected to further reduce PSF residuals and improve astrometric and shear accuracy.
+
+PSF characterization during LSSTCam commissioning demonstrates that the system achieves sub-percent modeling accuracy across the focal plane.
+Residual patterns correlate strongly with known sensor characteristics, validating both the physical understanding and calibration fidelity of the system.
+With the inclusion of chromatic and full-focal-plane models in upcoming releases, PSF performance is expected to reach the design specifications required for precision cosmology.

@@ -1,7 +1,9 @@
 \section{Stray and Scattered Light}
 \label{sec:stray_light}
 
-The unique, wide-field design of the Simonyi Survey Telescope makes it particularly susceptible to stray and scattered light. Since LSST seeks to investigate the low-surface-brightness universe \citep{2019ApJ...873..111I}, it is important to identify, model, and mitigate stray-light artifacts. This is particularly important in the context of the  the delayed installation of the light--wind screen \citep[LWS;][]{Marchiori:2024}. A general overview of the investigation of stray light features during commissioning can be found in \citet{SITCOMTN-160}, while a detailed investigation of the most prominent stray light feature (the ``scratched tape'') is discussed in \citet{SITCOMTN-166}. Here, we provide a brief summary of those efforts and the impact of stray and scattered light.
+The unique, wide-field design of the Simonyi Survey Telescope makes it particularly susceptible to stray and scattered light. Since LSST seeks to investigate the low-surface-brightness universe \citep{2019ApJ...873..111I}, it is important to identify, model, and mitigate stray-light artifacts. This is particularly important in the context of the  the delayed installation of the light--wind screen (LWS).
+%\citep[LWS;][]{Marchiori:2024}.
+%A general overview of the investigation of stray light features during commissioning can be found in \citet{SITCOMTN-160}, while a detailed investigation of the most prominent stray light feature (the ``scratched tape'') is discussed in \citet{SITCOMTN-166}. Here, we provide a brief summary of those efforts and the impact of stray and scattered light.
 
 A diverse set of stray and scattered light features were identified during the LSSTCam commissioning campaign. In contrast to optical ghosts, which are expected due to reflections within the optical system, stray and scattered light artifacts arise from unwanted light paths that do not follow the designed optical train. They include parasitic illumination that reaches the focal plane through reflections, scattering, or incomplete baffling of external light sources.
 
@@ -23,7 +25,7 @@ The process of identifying, investigating, and characterizing stray and scattere
     \item \textbf{Classification and Documentation:} Artifacts were compared to a library of known artifacts to determine whether they represents a novel feature.
     \item \textbf{Modeling and Reproduction:} Optical ray tracing was performed (i.e., using  \texttt{Zemax} and  \texttt{Batoid}) to reproduce the observed geometry and intensity distribution.
     \item \textbf{On-Sky and In-Dome Testing:} Dedicated test observations were performed to confirm or better understand the source and optical path. These observations included on-sky and in-dome images. The CBP was used to provide specific illumination paths during in-dome testing.
-    \item \textbf{Source Identification:} Carry out astrometric searches to locate the bright astronomical source (star, planet, or the moon) responsible for generating the feature. 
+    \item \textbf{Source Identification:} Carry out astrometric searches to locate the bright astronomical source (star, planet, or the moon) responsible for generating the feature.
     \item \textbf{Mitigation Assessment:} Evaluate hardware and operational mitigations, including additional baffling, surface treatment, and observing constraints.
     \item \textbf{Impact Evaluation:} Estimate the potential scientific impact on photometric and background measurements.
 \end{enumerate}
@@ -51,16 +53,16 @@ In addition to in-dome testing, the feature was also successfully reproduced in 
 
 \subsection{Short-term Mitigation Plan}
 
-It is suspected that several of the stray light features identified during commissioning may come from similar unobstructed paths at high off-axis angles, since much of the TMA and camera baffling was not designed with such a large incident angle range in mind. Eventually these light paths are expected to be blocked by the Light Wind Screen. However, in the stort term, an effective mitigation strategy is to extend the mid-level baffle outward by approximately 22\,cm. 
+It is suspected that several of the stray light features identified during commissioning may come from similar unobstructed paths at high off-axis angles, since much of the TMA and camera baffling was not designed with such a large incident angle range in mind. Eventually these light paths are expected to be blocked by the Light Wind Screen. However, in the stort term, an effective mitigation strategy is to extend the mid-level baffle outward by approximately 22\,cm.
 This baffle extension offers a simple, robust, and immediate reduction of the Scratched Tape feature with no expected optical or mechanical drawbacks.
 The design has been finalized and installation is expected to start in late November.
 
-Following installation, additional on-sky and in-dome tests will be performed to verify that the light path is fully blocked. Further mitigations under study include improving the M2 baffle coating, additional blackening of reflective surfaces near the auto-changer, and evaluation of direct paths from M3 to the camera. 
+Following installation, additional on-sky and in-dome tests will be performed to verify that the light path is fully blocked. Further mitigations under study include improving the M2 baffle coating, additional blackening of reflective surfaces near the auto-changer, and evaluation of direct paths from M3 to the camera.
 In parallel, algorithmic approaches for detecting and removing residual stray-light features at the data-processing stage are being explored. %ADW: This may be true, but I'm not fully aware of them...
 
 \subsection{Summary}
 
-The investigation of stray and scattered light during LSSTCam commissioning has established a framework for discovering, modeling, and mitigating parasitic optical features affecting the LSSTCam images. 
-Thorough investigations of the most prominent stray light features have resulted in a detailed understanding of their origins and have enabled short- and long-term mitigation strategies. 
+The investigation of stray and scattered light during LSSTCam commissioning has established a framework for discovering, modeling, and mitigating parasitic optical features affecting the LSSTCam images.
+Thorough investigations of the most prominent stray light features have resulted in a detailed understanding of their origins and have enabled short- and long-term mitigation strategies.
 Continued refinement of the opto-mechanical model, expanded baffling, and the commissioning of the Light Wind Screen are expected to significantly reduce stray light in operations.
 
