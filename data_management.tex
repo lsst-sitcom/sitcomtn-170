@@ -9,3 +9,23 @@ The primary purpose of this section is to describe that data management has been
     \item Figure with representative pixel-level color coadd images?
 \end{itemize}
 
+To provide feedback on the quality of the data and the performance of the system, Data Management runs processing campaigns on multiple timescales
+
+\begin{itemize}
+    \item Rapid Analysis framework - Quick Look payload @ summit
+    \begin{itemize}
+        \item Single-visit processing pipeline that supports decision-making during the night (e.g., RubinTV plots)
+    \end{itemize}
+    \item Prompt Processing framework - Alert Production payload @ USDF
+    \begin{itemize}
+        \item Alert production and population of the Alert Production Database (APDB)
+    \end{itemize}
+    \item Rapid Analysis framework - Nightly Validation payload @ USDF
+    \begin{itemize}
+        \item Continuous near-real-time processing of individual visits during the night + daytime processing at USDF through coaddition, to support daily planning of commissioning observations
+    \end{itemize}
+    \item Batch Production System - Cumulative Data Release Production (DRP) @ USDF
+    \begin{itemize}
+        \item Full scale processing at USDF of ~2 weeks of data on target fields, to develop our best understanding of the state of the system and pipelines
+    \end{itemize}
+\end{itemize}
