@@ -5,13 +5,10 @@ During the LSSTCam on-sky campaign, dedicated tests were performed to characteri
 
 \subsection{Sky Brightness Determination}
 
-Sky brightness measurements were performed using forced photometry on randomly placed “sky sources’’ across the focal plane.
-For each position, the local sky flux was compared to the model prediction.
+Sky brightness measurements were performed using forced photometry on randomly placed ``sky sources'' across the focal plane.
+Sky sources are defined as circular apertures with a radius of 8 pixels that avoid detected footprints or regions of bad or missing data.
+For each sky source position, the local sky flux was compared to the fitted background model prediction.
 Across the sample of real LSSTCam data, the precision of the sky brightness determination was better than 1\% in approximately 99\% of all measurements, meeting the system requirement (Fig.~\ref{fig:sky_backgrounds}).
-
-These tests used data from weekly DRP processing runs (e.g., week~18) that employed the full-focal-plane background modeling introduced with the \texttt{SkyCorrectionTask}.
-This task, initially developed for HSC, was commissioned for LSSTCam and now fits large-scale gradients across the entire focal plane.
-Comparisons between per-detector and full-focal-plane background solutions show that the latter reduces over-subtraction near bright, extended sources and improves uniformity across the field.
 
 \begin{figure}[h]
     \centering
@@ -22,11 +19,16 @@ Comparisons between per-detector and full-focal-plane background solutions show 
     \label{fig:sky_backgrounds}
 \end{figure}
 
+These tests used data from weekly DRP processing runs (e.g., week~18) that employed the full-focal-plane background modeling introduced with the \texttt{SkyCorrectionTask}.
+This task, initially developed for HSC, has been subsequently commissioned for use with LSSTCam.
+It operates by fitting large sky gradients across the full focal plane, in addition to subtracting the ``sky frame``; flux which remains static in focal plane coordinates after all other calibrations have been applied.
+Comparisons between per-detector and full-focal-plane background solutions show that the latter reduces over-subtraction near bright, extended sources and improves uniformity across the field.
+
 \subsection{Limiting Surface Brightness Sensitivity}
 
 Random sampling of sky regions from ten representative $g$-band LSSTCam visits yields a limiting surface brightness of $\sim$28~mag~arcsec$^{-2}$.
 This limit is defined as three times the standard deviation of the background flux distribution within 10~arcsecond boxes.
-Further validation using radial photometry of the brightest cluster galaxy (BCG) in Abell~360 confirms that surface brightness features are detected to similar levels in multiple bands.
+Further validation using LSSTComCam radial photometry of the brightest cluster galaxy (BCG) in Abell~360 confirms that surface brightness features are detected to similar levels in multiple bands \citep[SITCOMTN-165]{SITCOMTN-165}.
 These measurements demonstrate that the system is achieving the expected depth for extended, low surface brightness structures (Fig.~\ref{fig:lsb_results}).
 
 \begin{figure}[h]
@@ -35,41 +37,57 @@ These measurements demonstrate that the system is achieving the expected depth f
     \includegraphics[width=0.4\textwidth]{figures/surfacebrightness2.png}
     \caption{Low surface brightness performance.
     \textit{Left:} Random sampling of $g$-band LSSTCam visits yields a limiting surface brightness of $\sim$28~mag~arcsec$^{-2}$.
-    \textit{Right:} Radial photometry around the BCG in Abell~360 confirms consistent surface brightness sensitivity across filters.}
+    \textit{Right:} LSSTComCam Radial photometry around the BCG in Abell~360 confirms consistent surface brightness sensitivity across filters.}
     \label{fig:lsb_results}
 \end{figure}
 
 \subsection{Optical Ghost Area Impact}
 
-The contribution of optical ghosts to the effective background and usable imaging area was evaluated using ray-tracing simulations with an \texttt{Batoid} optical model calibrated to the observed data. 
+Optical ghosts have the potential to impact the effective background by contaminating large sections of any given exposure.
+Using the \texttt{Batoid} optical model ray-tracing software calibrated to observed LSSTCam data, we quantify the loss of usable imaging area due to ghosting.
 
 \subsubsection{Simulation Scheme}
-For each LSSTCam visit, all bright stars in the field were queried from the Yale Bright Star Catalog, and their magnitudes were transformed from V-band to LSST magnitudes using a set of transformation equations derived from the MONSTER reference catalog \citep[DMTN-277]{DMTN-277}. These transformations used the V-band magnitude and B-V color of the stars. They were then initialized into a Batoid ray-tracing simulation with the reflectances of the simulated optical elements set to the values produced by systems engineering simulations in the {\tt syseng_throughputs} package.
 
-The rays were propagated through the full system to produce simulated optical ghosts. The ghost flux was binned at the detector level. A ghost was considered to be "impacting" if the surface brightness of the ghost (in counts per pixel) was greater than $1/3$ of the median sky noise (estimated from the data for each visit) in at least one of the detectors. The procedure is shown in detail in \citet{SITCOMTN-173}.
+Bright stars from the Yale Bright Star Catalog were queried for each LSSTCam visit and their magnitudes transformed from V-band to LSST magnitudes using a set of transformation equations derived from the MONSTER reference catalog \citep[DMTN-277]{DMTN-277}.
+In addition to V-band magnitudes, transformations also rely on the reported B-V color of the stars.
+Using their reported coordinates, each star is then initialized into a Batoid ray-tracing simulation with the reflectances of the simulated optical elements set to the values produced by systems engineering simulations in the {\tt syseng_throughputs} package.
 
+The rays were propagated through the full system to produce simulated optical ghosts across an entire exposure.
+A ghost was considered to be ``significantly impacting'' if the surface brightness of the ghost (in counts per pixel) was greater than $1/3$ of the median sky noise (estimated from the data for each visit) in at least one of the detectors. The procedure is shown in detail in \citet{SITCOMTN-173}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ghost_impact.png}
-    \caption{(Right) Example of an LSSTCam with ghosting in the bottom-right corner of the focal plane. (Left) Area marked as impacted highlighted in yellow using a {\tt Batoid} simulation of the bright star in the image.}
+    \caption{Left: An example of ghosting in LSSTCam visit 2025050100732, with ghosting evident in the bottom-right corner of the focal plane. Right: The area found to be significantly impacted by ghost artifacts highlighted in yellow, as determined using a {\tt Batoid} simulation of the bright star in the image.}
     \label{fig:ghost_impacted_area_example}
 \end{figure}
 
 \subsubsection{Impacted Area Statistics}
-The week 37 DRP dataset was used as a proxy to assess the expected area impacted by optical ghosts in LSST. The DRP contained $\sim$3100 visits on which the scheme in the previous section was implemented. The top panel of Fig.~\ref{fig:ghosts} shows that the "usual case" average ghost-affected area is $\sim$0.6\%. The average ghost-affected area is highest in $u$ and lowest in $r$ and $i$. This satisfies the system requirement that the fractional area impacted by ghosts remain below 1\%.
 
-This number, however, is highly dependent on the fields being observed. To assess the variation in the ghost-affected area, 20 highly-ghosted visits were picked in each band (except $y$) by visual inspection which serve as the "worst case" impacted area, which is highest in $u$ at $\sim$8\%. 
+The week 37 DRP dataset (\texttt{LSSTCam/runs/DRP/20250604_20250906/w_2025_37/DM-52496}) was used as a proxy to assess the expected area impacted by optical ghosts in LSST during operations.
+The DRP contains $\sim$3100 visits on which to assess ghost area impact.
+The top panel of Fig.~\ref{fig:ghosts} (cyan points) shows that the typical ``usual case'' average ghost-affected area is $\sim$0.6\% when averaged across all bands.
+The average ghost-affected area is highest in $u$ and lowest in $r$ and $i$.
+This satisfies the nominal system requirement that the fractional area impacted by ghosts remain below 1\%.
 
-The impacted area was also calculated as a function of star magnitude in each band by placing simulated stars at different off-axis positions within the focal plane. The bottom-right panel in Fig.~\ref{fig:ghosts} shows that the impacted-area doesn't depend strongly on the field position.  
+As expected, the ghost area impact is highly dependent on the fields being observed.
+To assess the variation in the ghost-affected area, 20 highly-ghosted visits were selected in each band\footnote{except in the $y$ band, for which 20 example visits with severe ghosting could not be identified.} by visual inspection which serve as the ``worst case'' impacted area.
+As shown, the worst case ghost area impact is highest in $u$ at $\sim$8\%, dropping to below 1\% in $z$.
 
+The total ghost impacted area was also calculated as a function of star magnitude in each band by placing simulated stars at different off-axis positions within the focal plane.
+The bottom panels in Fig.~\ref{fig:ghosts} show the fraction of the focal plane impacted as a function of simulated LSST star magnitude, for both on-axis in multiple filters (left panel) and off-axis in the $r$ band (right panel).
+As shown here, the impacted area does not appear to depend strongly on field position, with star magnitude the dominant factor as expected.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ghost_impact1.png}
     \includegraphics[width=0.9\textwidth]{figures/ghost_impact2.png}
-    \caption{(Top) Fraction of the focal plane impacted by optical ghosts simulated with \texttt{Batoid} as a function of bandpass. The "usual case" impacted area was calculated using DRP visits while the "worst case" impacted area was calculated using visits that contained high amounts of ghosting selected by visual inspection. 
-    The average impacted area is $\sim$0.6\%, with the most area lost in $u$ and least in $r$ and $i$, satisfying the requirement that ghost area loss remain below 1\%. (Bottom Left) Impacted area as a function of simulated star magnitude in each band. (Bottom Right) Impacted area as a function of field position of the simulated star in r-band. The impacted area does not vary heavily with field position.}
+    \caption{(Top) Fraction of the focal plane impacted by optical ghosts simulated with \texttt{Batoid} as a function of bandpass.
+    The ``usual case'' impacted area values (cyan diamonds) are calculated using visits from a recent DRP data reduction run designed to mimic data taken during operations while the ``worst case'' impacted area values (purple crosses) are calculated using visits that contain high amounts of ghosting selected by visual inspection.
+    The average impacted area across all bands is $\sim$0.6\%, with the most area lost in $u$ and least in $r$ and $i$, satisfying the requirement that ghost area loss remain below 1\%.
+    (Bottom Left) Impacted area as a function of on-axis simulated star magnitude in each band.
+    (Bottom Right) Impacted area as a function of field position of the simulated star in the $r$-band.
+    The impacted area does not vary heavily with field position, with star magnitude the dominant factor.}
     \label{fig:ghosts}
 \end{figure}
 
