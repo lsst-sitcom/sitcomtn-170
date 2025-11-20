@@ -50,7 +50,7 @@ Using the \texttt{Batoid} optical model ray-tracing software calibrated to obser
 
 Bright stars from the Yale Bright Star Catalog were queried for each LSSTCam visit and their magnitudes transformed from V-band to LSST magnitudes using a set of transformation equations derived from the MONSTER reference catalog \citep[DMTN-277]{DMTN-277}.
 In addition to V-band magnitudes, transformations also rely on the reported B-V color of the stars.
-Using their reported coordinates, each star is then initialized into a Batoid ray-tracing simulation with the reflectances of the simulated optical elements set to the values produced by systems engineering simulations in the {\tt syseng_throughputs} package.
+Using their reported coordinates, each star is then initialized into a Batoid ray-tracing simulation with the reflectances of the simulated optical elements set to the values produced by systems engineering simulations in the \texttt{syseng\_throughputs} package.
 
 The rays were propagated through the full system to produce simulated optical ghosts across an entire exposure.
 A ghost was considered to be ``significantly impacting'' if the surface brightness of the ghost (in counts per pixel) was greater than $1/3$ of the median sky noise (estimated from the data for each visit) in at least one of the detectors. The procedure is shown in detail in \citet{SITCOMTN-173}.
@@ -64,7 +64,7 @@ A ghost was considered to be ``significantly impacting'' if the surface brightne
 
 \subsubsection{Impacted Area Statistics}
 
-The week 37 DRP dataset (\texttt{LSSTCam/runs/DRP/20250604_20250906/w_2025_37/DM-52496}) was used as a proxy to assess the expected area impacted by optical ghosts in LSST during operations.
+The week 37 DRP dataset (\texttt{LSSTCam/runs/DRP/20250604\_20250906/w\_2025\_37/DM-52496}) was used as a proxy to assess the expected area impacted by optical ghosts in LSST during operations.
 The DRP contains $\sim$3100 visits on which to assess ghost area impact.
 The top panel of Fig.~\ref{fig:ghosts} (cyan points) shows that the typical ``usual case'' average ghost-affected area is $\sim$0.6\% when averaged across all bands.
 The average ghost-affected area is highest in $u$ and lowest in $r$ and $i$.
